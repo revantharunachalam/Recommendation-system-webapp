@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+
+<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@7.2.0/dist/css/autoComplete.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js">
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js">
+    </script>
+
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-lightness/jquery-ui.css"
+        rel="stylesheet" type="text/css" />
+
+
+<style>
+body {
+  font-family: Arial;
+  padding-top: 5%;
+  padding-left: 18%;
+  padding-right: 18%;
+  background-image: url('https://i.pinimg.com/originals/86/f1/99/86f199d0c6f5cedd14c121164fa5fafc.jpg');
+}
+
+* {
+  box-sizing: border-box;
+}
+
+form.example input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+form.example button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+
+form.example button:hover {
+  background: #0b7dda;
+}
+
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+</style>
+</head>
+<body id="content">
+
+	<div class="card">
+		<div class="card-header display-6" style="color: #0b7dda;">
+		  Movie Recommendation System
+		</div>
+		<div class="card-body">
+			<form class="example" action="{{url_for('display')}}" method="POST">
+				<input type="text" placeholder="Enter the movie title" name="movie" id="autocomplete">
+				<button type="submit"><i class="fa fa-search"></i></button>
+			</form>
+			<p>
+				<ul class="list-group">
+					<li class="list-group-item active h3">Instructions for using API</li>
+					<li class="list-group-item">1. Use 'URI/recommend?name=movie_name' to get the recommended movies</li>
+					<li class="list-group-item">2. Use 'URI/sentiment?name=movie_name' to get the sentiment analysis of movies</li>
+					<li class="list-group-item">3. For space use '+' or '%20'</li>
+					<li class="list-group-item">4. 'URI/home' or 'URI/' to see the instructions</li>
+					<li class="list-group-item">5.The response from the API consist of movie name, Director, Genere, Actors of recommended movies followed by the same details of query movie</li>
+				</ul>
+			</p>
+		</div>
+	  </div>
+
+	  <script>
+		  $( function(){
+			  var avilableTags = [
+				  {% for flim in flims %}
+				  	"{{ film }}"
+				  {% endfor %}
+			  ];
+			$("#autocomplete").autocomplete({
+				source: avilableTags
+			});
+		  });
+	  </script>
+
+</body>
+</html> 

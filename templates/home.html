@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+	 <title>Movie Recommendation System</title>
+	<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@7.2.0/dist/css/autoComplete.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js"></script>
+  <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-lightness/jquery-ui.css"rel="stylesheet" type="text/css" />
+
+  <!-- Bootstrap -->
+
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+  <!-- JavaScript Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+
+   <style>
+  	.movie {
+      color: #fff;
+    	margin-left: auto;
+    	margin-right: auto;
+      resize: none;
+    }
+
+  	.btn-block{
+    	width: 15%;
+    	text-align: center;
+    	margin-left: auto;
+    	margin-right: auto;
+    	color: #e4e0e0;
+    }
+
+    #content {
+    	background-image: url("https://i.pinimg.com/originals/86/f1/99/86f199d0c6f5cedd14c121164fa5fafc.jpg");
+    	background-color: #181818;
+      padding-top: 5%;
+      padding-left: 18%;
+      padding-right: 18%;
+    }
+
+  	.footer {
+  		color: #e4e0e0;
+  		text-align:right;
+  		position: fixed;
+     	bottom: 20px;
+     	right: 20px;
+     	width: 100%;
+  	}
+
+    .card {
+      cursor: pointer;
+    }
+
+    h1 {
+	    font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	    color: #e50914;
+	    font-weight: bold;
+	    margin-top: 30px;
+	 }
+
+    #autoComplete {
+      background-position: 780px ;
+    }
+
+  </style>
+
+</head>
+<body id="content" style="font-family: 'Noto Sans JP', sans-serif;">
+
+	<div class="ml-container card bg-warning" style="display: block;">
+    <div class="card-header display-6" style="color: white">
+		  <center>Movie Recommendation System</center>
+		</div>
+    <div class="card-body">
+		<form class="example" action="{{ url_for('display')}}" method="POST">
+			<div class="form-group shadow-textarea" style="margin-top: 30px;text-align: center;color: white;">
+			  <input type="text" id="autocomplete" name="movie" class="movie form-control"   placeholder="Enter the Movie Name" style="background-color: #ffffff;border-color:#ffffff;width: 60%;color: #181818"/>
+        <br>
+		  </div>
+
+      <div class="form-group" style="text-align: center;">
+        <button type="submit" class="btn btn-primary btn-block btn-lg" style="background-color: #e50914;text-align: center;border-color: #e50914;width:120px;">Submit</button><br><br>
+      </div>
+	  </form>
+    <p>
+      <ul class="list-group">
+        <li class="list-group-item h3">Instructions for using API</li>
+        <li class="list-group-item">1. Use 'URI/recommend?name=movie_name' to get the recommended movies</li>
+        <li class="list-group-item">2. Use 'URI/sentiment?name=movie_name' to get the sentiment analysis of movies</li>
+        <li class="list-group-item">3. For space use '+' or '%20'</li>
+        <li class="list-group-item">4. 'URI/home' or 'URI/' to see the instructions</li>
+        <li class="list-group-item">5.The response from the API consist of movie name, Director, Genere, Actors of recommended movies followed by the same details of query movie</li>
+      </ul>
+    </p>
+  </div>
+
+	</div>
+  <script>
+  $( function() {
+    var availableTags = [
+        {% for flim in flims %}
+            "{{flim}}",
+        {% endfor %}
+    ];
+    $( "#autocomplete" ).autocomplete({
+      source: availableTags
+    });
+  } );
+  </script>
+
+</body>
+</html>

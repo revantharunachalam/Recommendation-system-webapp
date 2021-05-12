@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+<style>
+    body {
+      font-family: Arial;
+      padding-top: 5%;
+      padding-left: 7%;
+      padding-right: 7%;
+      background-image: url('https://i.pinimg.com/originals/86/f1/99/86f199d0c6f5cedd14c121164fa5fafc.jpg');
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+    
+    form.example input[type=text] {
+      padding: 10px;
+      font-size: 17px;
+      border: 1px solid grey;
+      float: left;
+      width: 80%;
+      background: #f1f1f1;
+    }
+    
+    form.example button {
+      float: left;
+      width: 20%;
+      padding: 10px;
+      background: #2196F3;
+      color: white;
+      font-size: 17px;
+      border: 1px solid grey;
+      border-left: none;
+      cursor: pointer;
+    }
+    
+    form.example button:hover {
+      background: #0b7dda;
+    }
+    
+    form.example::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+    </style>
+</head>
+
+<body>
+      <div class="container">
+          <div class="row">
+            <div class="col">
+              <div class="card" style="width: 18rem;">
+                  <img src="{{ sent_res.Poster }}" class="card-img-top" alt="movie poster">
+                  <!-- <img src="https://image.tmdb.org/t/p/original/6EiRUJpuoeQPghrs3YNktfnqOVh.jpg" class="card-img-top" alt="movie poster"> -->
+                  <div class="card-body">
+                    <h3 style="color: #0b7dda;" class="card-title">{{ sent_res.Movie }}</h3>
+                    <p class="card-text">{{ sent_res.Description }}</p>
+                    <a href="{{ sent_res.OfficialPage }}" class="btn btn-primary">Go to website</a>
+                  </div>
+                </div>
+      
+            </div>
+            <div class="col-9">
+              <div class="card">
+                <div class="card-header h2" style="color: #0b7dda;">
+                  Review sentiment analysis
+              </div>
+              <div class="card-body">
+                <ul class="list-group">
+                  {% for i in range(0, length_sen) %}
+                    <li class="list-group-item">
+                      <p>{{ sent_res.Sentiment[i].review }}</p>
+                      {% if sent_res.Sentiment[i].predicted_sentiment == 1 %}
+                          <p class="h4" style="color:green;">Positive</p>
+                      {% else %}
+                          <p class="h4" style="color: red;">Negative</p>
+                      {% endif %}
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+          </div>
+          
+          <br><br>
+
+          <div class="row">
+            <div class="col">
+              <div class="card">
+                <div class="card-header h4" style="color: #0b7dda;">
+                  Recommended movies
+                </div>
+                <div class="card-body">
+                    
+                  <div class="list-group">
+                    {% for i in range(0, length_rec) %}
+                      <p>
+                        <div class="row">
+                          <div class="col">
+                            <div class="card" style="width: 18rem;">
+                              <img src="{{ rec_res.Recommendations[i].poster }}" class="card-img-top" alt="movie poster">
+                              <!-- <img src="https://image.tmdb.org/t/p/original/6EiRUJpuoeQPghrs3YNktfnqOVh.jpg" class="card-img-top" alt="movie poster"> -->                           
+                              <a href="{{ rec_res.Recommendations[i].official_page }}" class="btn btn-primary">Go to website</a>
+                            </div>
+                          </div>
+                          <div class="col-9">
+                            <div class="d-flex w-100 justify-content-between">
+                              <h3 style="color: #0b7dda;" class="mb-1">{{ rec_res.Recommendations[i].movie_name }}</h3>
+                            </div>
+                            <p class="mb-1">{{ rec_res.Recommendations[i].overview }}</p>
+                          </div>
+                        </div>
+                      </p>
+                    {% endfor %}
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+
+</body>
+</html>
