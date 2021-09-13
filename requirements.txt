@@ -10,8 +10,11 @@ scikit-learn>=0.18
 matplotlib>=1.4.3
 pandas>=0.19
 requests>=2.25.0
-spacy>=2.3.5
+spacy==2.3.5
 beautifulsoup4>=4.9.3
 click==7.0
 tmdbv3api>=1.7
 lxml>=4.6
+nltk>=3.6
+pyresparser>=1.0
+https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.3.1/en_core_web_sm-2.3.1.tar.gz
