@@ -13,3 +13,4 @@ requests>=2.25.0
 spacy>=2.3.5
 beautifulsoup4>=4.9.3
 click==7.0
+tmdbv3api>=1.7
