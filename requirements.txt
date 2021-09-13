@@ -12,4 +12,4 @@ pandas>=0.19
 requests>=2.25.0
 spacy>=2.3.5
 beautifulsoup4>=4.9.3
-click>=8.0.1
+click==7.0
